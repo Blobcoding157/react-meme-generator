@@ -2,16 +2,16 @@ import './App.css';
 import { useState } from 'react';
 import { saveAs } from 'file-saver';
 
-async function getMemes() {
-  const newSite = [];
-  const site = await fetch('https://api.memegen.link/templates/').then(
-    (response) => response.json(),
-  );
-  site.map((i) => newSite.push(i.id));
-  return newSite;
-}
+// async function getMemes() {
+//   const newSite = [];
+//   const site = await fetch('https://api.memegen.link/templates/').then(
+//     (response) => response.json(),
+//   );
+//   site.map((i) => newSite.push(i.id));
+//   return newSite;
+// }
 
-const memeNames = getMemes().id;
+// const memeNames = getMemes().id;
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
