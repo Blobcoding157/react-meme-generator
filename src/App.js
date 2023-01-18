@@ -22,7 +22,7 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
     topTrue = 'Generate';
   }
   if (!bottomTrue) {
-    bottomTrue = 'Your Dreams';
+    bottomTrue = 'YourDreams';
   }
   return (
     <img
@@ -55,7 +55,7 @@ export default function App() {
       newInputTop = 'Generate';
     }
     if (!newInputBottom) {
-      newInputBottom = 'Your Dreams';
+      newInputBottom = 'YourDreams';
     }
 
     const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}/${newInputBottom}.png`;
@@ -96,6 +96,7 @@ export default function App() {
       </label>
       <br />
       <button
+        data-test-id="generate-meme"
         onClick={() => {
           setInputBottom(newInputBottom);
           setInputTop(newInputTop);
