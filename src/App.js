@@ -2,27 +2,45 @@ import './App.css';
 import { useState } from 'react';
 import { saveAs } from 'file-saver';
 
-// async function getMemes() {
-//   const newSite = [];
-//   const site = await fetch('https://api.memegen.link/templates/').then(
-//     (response) => response.json(),
-//   );
-//   site.map((i) => newSite.push(i.id));
-//   return newSite;
-// }
-
-// const memeNames = getMemes().id;
-
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
     templates = 'buzz';
-    // templates = memeNames[Math.floor(Math.random() * memeNames.length)];
   }
+
   if (!topTrue) {
     topTrue = 'Generate';
+  } else {
+    topTrue = topTrue
+      .replace(/[ ]/g, '_')
+      .replace(/[__]/g, '_')
+      .replace(/[--]/g, '-')
+      .replace(/[?]/g, '~q')
+      .replace(/[&]/g, '~a')
+      .replace(/[%]/g, '~p')
+      .replace(/[/]/g, '~s')
+      .replace(/[#]/g, '~h')
+      .replace(/[<]/g, '~l')
+      .replace(/[>]/g, '~g')
+      .replace(/["]/g, '')
+      .replace(/[\\]/g, '~b');
   }
+
   if (!bottomTrue) {
-    bottomTrue = 'YourDreams';
+    bottomTrue = 'Your Dreams';
+  } else {
+    bottomTrue = bottomTrue
+      .replace(/[ ]/g, '_')
+      .replace(/[__]/g, '_')
+      .replace(/[--]/g, '-')
+      .replace(/[?]/g, '~q')
+      .replace(/[&]/g, '~a')
+      .replace(/[%]/g, '~p')
+      .replace(/[/]/g, '~s')
+      .replace(/[#]/g, '~h')
+      .replace(/[<]/g, '~l')
+      .replace(/[>]/g, '~g')
+      .replace(/["]/g, '')
+      .replace(/[\\]/g, '~b');
   }
   return (
     <img
@@ -32,11 +50,6 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
     />
   );
 }
-
-// const handleClick = () => {
-//   const url = imgBuilder;
-//   saveAs(url, 'Meme.txt');
-// };
 
 export default function App() {
   const [inputBottom, setInputBottom] = useState('');
@@ -51,11 +64,40 @@ export default function App() {
     if (!newInputTemplate) {
       newInputTemplate = 'buzz';
     }
+
     if (!newInputTop) {
       newInputTop = 'Generate';
+    } else {
+      newInputTop = newInputTop
+        .replace(/[ ]/g, '_')
+        .replace(/[__]/g, '_')
+        .replace(/[--]/g, '-')
+        .replace(/[?]/g, '~q')
+        .replace(/[&]/g, '~a')
+        .replace(/[%]/g, '~p')
+        .replace(/[/]/g, '~s')
+        .replace(/[#]/g, '~h')
+        .replace(/[<]/g, '~l')
+        .replace(/[>]/g, '~g')
+        .replace(/["]/g, '')
+        .replace(/[\\]/g, '~b');
     }
     if (!newInputBottom) {
-      newInputBottom = 'YourDreams';
+      newInputBottom = 'Your Dreams';
+    } else {
+      newInputBottom = newInputBottom
+        .replace(/[ ]/g, '_')
+        .replace(/[__]/g, '_')
+        .replace(/[--]/g, '-')
+        .replace(/[?]/g, '~q')
+        .replace(/[&]/g, '~a')
+        .replace(/[%]/g, '~p')
+        .replace(/[/]/g, '~s')
+        .replace(/[#]/g, '~h')
+        .replace(/[<]/g, '~l')
+        .replace(/[>]/g, '~g')
+        .replace(/["]/g, '')
+        .replace(/[\\]/g, '~b');
     }
 
     const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}/${newInputBottom}.png`;
