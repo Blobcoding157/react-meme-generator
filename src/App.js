@@ -4,11 +4,11 @@ import { saveAs } from 'file-saver';
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
-    templates = 'buzz';
+    templates = '';
   }
 
   if (!topTrue) {
-    topTrue = 'Generate';
+    topTrue = '';
   } else {
     topTrue = topTrue
       .replace(/[ ]/g, '_')
@@ -17,6 +17,7 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
       .replace(/[?]/g, '~q')
       .replace(/[&]/g, '~a')
       .replace(/[%]/g, '~p')
+      .replace(/[%20]/g, '_')
       .replace(/[/]/g, '~s')
       .replace(/[#]/g, '~h')
       .replace(/[<]/g, '~l')
@@ -26,26 +27,28 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   }
 
   if (!bottomTrue) {
-    bottomTrue = 'Your Dreams';
+    bottomTrue = '';
   } else {
-    bottomTrue = bottomTrue
-      .replace(/[ ]/g, '_')
-      .replace(/[__]/g, '_')
-      .replace(/[--]/g, '-')
-      .replace(/[?]/g, '~q')
-      .replace(/[&]/g, '~a')
-      .replace(/[%]/g, '~p')
-      .replace(/[/]/g, '~s')
-      .replace(/[#]/g, '~h')
-      .replace(/[<]/g, '~l')
-      .replace(/[>]/g, '~g')
-      .replace(/["]/g, '')
-      .replace(/[\\]/g, '~b');
+    bottomTrue =
+      '/' +
+      bottomTrue
+        .replace(/[ ]/g, '_')
+        .replace(/[__]/g, '_')
+        .replace(/[--]/g, '-')
+        .replace(/[?]/g, '~q')
+        .replace(/[&]/g, '~a')
+        .replace(/[%]/g, '~p')
+        .replace(/[/]/g, '~s')
+        .replace(/[#]/g, '~h')
+        .replace(/[<]/g, '~l')
+        .replace(/[>]/g, '~g')
+        .replace(/["]/g, '')
+        .replace(/[\\]/g, '~b');
   }
   return (
     <img
       data-test-id="meme-image"
-      src={`https://api.memegen.link/images/${templates}/${topTrue}/${bottomTrue}.png`}
+      src={`https://api.memegen.link/images/${templates}/${topTrue}${bottomTrue}.png`}
       alt="memes"
     />
   );
@@ -54,7 +57,7 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
 export default function App() {
   const [inputBottom, setInputBottom] = useState('');
   const [inputTop, setInputTop] = useState('');
-  const [inputTemplate, setInputTemplate] = useState('');
+  const [inputTemplate, setInputTemplate] = useState('buzz');
 
   let newInputTemplate = inputTemplate;
   let newInputTop = inputTop;
@@ -62,11 +65,11 @@ export default function App() {
 
   const handleClick = () => {
     if (!newInputTemplate) {
-      newInputTemplate = 'buzz';
+      newInputTemplate = '';
     }
 
     if (!newInputTop) {
-      newInputTop = 'Generate';
+      newInputTop = '';
     } else {
       newInputTop = newInputTop
         .replace(/[ ]/g, '_')
@@ -83,7 +86,7 @@ export default function App() {
         .replace(/[\\]/g, '~b');
     }
     if (!newInputBottom) {
-      newInputBottom = 'Your Dreams';
+      newInputBottom = '';
     } else {
       newInputBottom = newInputBottom
         .replace(/[ ]/g, '_')
