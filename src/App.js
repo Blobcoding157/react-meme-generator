@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { async } from 'q';
+import { saveAs } from 'file-saver';
 
 async function getMemes() {
   const newSite = [];
@@ -11,29 +11,56 @@ async function getMemes() {
   return newSite;
 }
 
-function GenerateImage(props) {
-  if (!props.topTrue || !props.bottomTrue) {
-    return (
-      <img
-        data-test-id="meme-image"
-        src="https://api.memegen.link/images/ugandanknuck/Top_Text/Bottom_Text.png"
-        alt="memes"
-      />
-    );
+const memeNames = getMemes().id;
+
+function NewGenerateImage({ templates, topTrue, bottomTrue }) {
+  if (!templates) {
+    templates = 'buzz';
+    // templates = memeNames[Math.floor(Math.random() * memeNames.length)];
+  }
+  if (!topTrue) {
+    topTrue = 'Generate';
+  }
+  if (!bottomTrue) {
+    bottomTrue = 'Your Dreams';
   }
   return (
     <img
       data-test-id="meme-image"
-      src={`https://api.memegen.link/images/${props.templates}/${props.topTrue}/${props.bottomTrue}.png`}
+      src={`https://api.memegen.link/images/${templates}/${topTrue}/${bottomTrue}.png`}
       alt="memes"
     />
   );
 }
 
+// const handleClick = () => {
+//   const url = imgBuilder;
+//   saveAs(url, 'Meme.txt');
+// };
+
 export default function App() {
   const [inputBottom, setInputBottom] = useState('');
   const [inputTop, setInputTop] = useState('');
-  const [inputTemplate, setInputTemplate] = useState('ugandanknuck');
+  const [inputTemplate, setInputTemplate] = useState('');
+
+  let newInputTemplate = inputTemplate;
+  let newInputTop = inputTop;
+  let newInputBottom = inputBottom;
+
+  const handleClick = () => {
+    if (!newInputTemplate) {
+      newInputTemplate = 'buzz';
+    }
+    if (!newInputTop) {
+      newInputTop = 'Generate';
+    }
+    if (!newInputBottom) {
+      newInputBottom = 'Your Dreams';
+    }
+
+    const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}/${newInputBottom}.png`;
+    saveAs(url, `Meme_${newInputTemplate}`);
+  };
 
   return (
     <div>
@@ -41,10 +68,9 @@ export default function App() {
       <label>
         Top text
         <input
-          value={inputTop}
           placeholder="Top Text"
           onChange={(event) => {
-            setInputTop(event.currentTarget.value);
+            newInputTop = event.currentTarget.value;
           }}
         />
       </label>
@@ -52,10 +78,9 @@ export default function App() {
       <label>
         Bottom text
         <input
-          value={inputBottom}
           placeholder="Bottom Text"
           onChange={(event) => {
-            setInputBottom(event.currentTarget.value);
+            newInputBottom = event.currentTarget.value;
           }}
         />
       </label>
@@ -63,18 +88,27 @@ export default function App() {
       <label>
         Meme template
         <input
-          // value={inputTemplate}
           placeholder="Template"
           onChange={(event) => {
-            setInputTemplate(event.currentTarget.value);
+            newInputTemplate = event.currentTarget.value;
           }}
         />
       </label>
       <br />
-      <button>Generate</button>
+      <button
+        onClick={() => {
+          setInputBottom(newInputBottom);
+          setInputTop(newInputTop);
+          setInputTemplate(newInputTemplate);
+        }}
+      >
+        Generate
+      </button>
+
+      <button onClick={handleClick}>Download</button>
       <br />
       <br />
-      <GenerateImage
+      <NewGenerateImage
         topTrue={inputTop}
         bottomTrue={inputBottom}
         templates={inputTemplate}
