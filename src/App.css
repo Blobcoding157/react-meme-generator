@@ -1,0 +1,99 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: azure;
+
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.header {
+  color: blueviolet;
+  margin: 50px;
+  position: relative;
+  animation: infinite;
+  animation-name: titleAnimation;
+  animation-duration: 10s;
+  animation-delay: 0s;
+}
+label {
+  font-size: 0%;
+}
+button {
+  background-color: aquamarine;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  padding: 15px 30px;
+  margin: 2px;
+  border-radius: 10px;
+}
+.image {
+  border-style: none;
+  animation-name: imgAnimation;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+button:hover {
+  border-color: aquamarine;
+  border-style: solid;
+  background-color: white;
+}
+
+input {
+  background-color: rgb(179, 234, 214);
+  width: 120px;
+  padding: 10px;
+  border: none;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  outline: none;
+}
+input:focus {
+  background-color: white;
+  border: 2px solid aquamarine;
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+  outline: none;
+  width: 200px;
+
+  position: relative;
+  animation: 1;
+  animation-name: inputAnimation;
+  animation-duration: 0.2s;
+}
+
+@keyframes titleAnimation {
+  0% {
+    color: blue;
+    pointer-events: none;
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+    transform: rotateX(360deg);
+    transform: rotateY(360deg);
+    pointer-events: none;
+    color: red;
+  }
+  100% {
+    pointer-events: none;
+    rotate: 360deg;
+    color: green;
+  }
+}
+@keyframes imgAnimation {
+  0% {
+    transform: scale(0, 0);
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+@keyframes inputAnimation {
+  100% {
+    rotate: 360deg;
+  }
+}

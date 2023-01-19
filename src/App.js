@@ -6,7 +6,6 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
     templates = '';
   }
-
   if (!topTrue) {
     topTrue = '';
   } else {
@@ -32,8 +31,8 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
     bottomTrue =
       '/' +
       bottomTrue
-        .replace(/[ ]/g, '_')
         .replace(/[__]/g, '_')
+        .replace(/[ ]/g, '_')
         .replace(/[--]/g, '-')
         .replace(/[?]/g, '~q')
         .replace(/[&]/g, '~a')
@@ -48,6 +47,7 @@ function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   return (
     <img
       data-test-id="meme-image"
+      className="image"
       src={`https://api.memegen.link/images/${templates}/${topTrue}${bottomTrue}.png`}
       alt="memes"
     />
@@ -103,13 +103,13 @@ export default function App() {
         .replace(/[\\]/g, '~b');
     }
 
-    const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}/${newInputBottom}.png`;
+    const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}${newInputBottom}.png`;
     saveAs(url, `Meme_${newInputTemplate}`);
   };
 
   return (
-    <div>
-      <h1>The Grand Meme Generator</h1>
+    <div className="container">
+      <h1 className="header">The Grand Meme Generator</h1>
       <label>
         Top text
         <input
@@ -140,18 +140,20 @@ export default function App() {
         />
       </label>
       <br />
-      <button
-        data-test-id="generate-meme"
-        onClick={() => {
-          setInputBottom(newInputBottom);
-          setInputTop(newInputTop);
-          setInputTemplate(newInputTemplate);
-        }}
-      >
-        Generate
-      </button>
+      <span>
+        <button
+          data-test-id="generate-meme"
+          onClick={() => {
+            setInputBottom(newInputBottom);
+            setInputTop(newInputTop);
+            setInputTemplate(newInputTemplate);
+          }}
+        >
+          Generate
+        </button>
 
-      <button onClick={handleClick}>Download</button>
+        <button onClick={handleClick}>Download</button>
+      </span>
       <br />
       <br />
       <NewGenerateImage
