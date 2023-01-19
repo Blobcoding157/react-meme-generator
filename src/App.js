@@ -1,6 +1,6 @@
 import './App.css';
-import { useState } from 'react';
 import { saveAs } from 'file-saver';
+import { useState } from 'react';
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
@@ -88,19 +88,21 @@ export default function App() {
     if (!newInputBottom) {
       newInputBottom = '';
     } else {
-      newInputBottom = newInputBottom
-        .replace(/[ ]/g, '_')
-        .replace(/[__]/g, '_')
-        .replace(/[--]/g, '-')
-        .replace(/[?]/g, '~q')
-        .replace(/[&]/g, '~a')
-        .replace(/[%]/g, '~p')
-        .replace(/[/]/g, '~s')
-        .replace(/[#]/g, '~h')
-        .replace(/[<]/g, '~l')
-        .replace(/[>]/g, '~g')
-        .replace(/["]/g, '')
-        .replace(/[\\]/g, '~b');
+      newInputBottom =
+        '/' +
+        newInputBottom
+          .replace(/[ ]/g, '_')
+          .replace(/[__]/g, '_')
+          .replace(/[--]/g, '-')
+          .replace(/[?]/g, '~q')
+          .replace(/[&]/g, '~a')
+          .replace(/[%]/g, '~p')
+          .replace(/[/]/g, '~s')
+          .replace(/[#]/g, '~h')
+          .replace(/[<]/g, '~l')
+          .replace(/[>]/g, '~g')
+          .replace(/["]/g, '')
+          .replace(/[\\]/g, '~b');
     }
 
     const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}${newInputBottom}.png`;
