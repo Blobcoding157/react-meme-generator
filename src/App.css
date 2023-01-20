@@ -66,6 +66,31 @@ input:focus {
   animation-duration: 0.2s;
 }
 
+select {
+  background-color: rgb(179, 234, 214);
+  width: 120px;
+  padding: 10px;
+  border: none;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  outline: none;
+}
+
+select:focus {
+  background-color: white;
+  border: 2px solid aquamarine;
+  border-radius: 10px;
+  margin: 10px;
+  outline: none;
+  width: 200px;
+
+  position: relative;
+  animation: 1;
+  animation-name: inputAnimation;
+  animation-duration: 0.2s;
+}
+
 @keyframes titleAnimation {
   0% {
     color: blue;

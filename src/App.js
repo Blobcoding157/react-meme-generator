@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { saveAs } from 'file-saver';
+import axios from 'axios';
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
@@ -58,10 +59,18 @@ export default function App() {
   const [inputBottom, setInputBottom] = useState('');
   const [inputTop, setInputTop] = useState('');
   const [inputTemplate, setInputTemplate] = useState('buzz');
+  const [templateData, setTemplateData] = useState([]);
 
   let newInputTemplate = inputTemplate;
   let newInputTop = inputTop;
   let newInputBottom = inputBottom;
+
+  axios
+    .get('https://api.memegen.link/templates')
+    .then((response) => {
+      setTemplateData(response.data);
+    })
+    .catch((error) => console.error(error));
 
   const handleClick = () => {
     if (!newInputTemplate) {
@@ -155,6 +164,20 @@ export default function App() {
         <button onClick={handleClick}>Download</button>
       </span>
       <br />
+
+      <select
+        value={newInputTemplate}
+        onChange={(event) => {
+          setInputTemplate(event.currentTarget.value);
+        }}
+      >
+        {templateData.map((event) => (
+          <option key={event.id} value={event.id}>
+            {event.id}
+          </option>
+        ))}
+      </select>
+
       <br />
       <NewGenerateImage
         topTrue={inputTop}
