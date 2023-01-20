@@ -1,7 +1,8 @@
 import './App.css';
-import { useState } from 'react';
-import { saveAs } from 'file-saver';
 import axios from 'axios';
+import { saveAs } from 'file-saver';
+import { useState } from 'react';
+import bruh from './bruh.mp3';
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
@@ -65,6 +66,13 @@ export default function App() {
   let newInputTop = inputTop;
   let newInputBottom = inputBottom;
 
+  function start() {
+    const omg = new Audio(bruh);
+    omg.play().catch((error) => {
+      console.error(error);
+    });
+  }
+
   axios
     .get('https://api.memegen.link/templates')
     .then((response) => {
@@ -126,7 +134,7 @@ export default function App() {
         <input
           placeholder="Top Text"
           onChange={(event) => {
-            newInputTop = event.currentTarget.value;
+            setInputTop(event.currentTarget.value);
           }}
         />
       </label>
@@ -136,7 +144,7 @@ export default function App() {
         <input
           placeholder="Bottom Text"
           onChange={(event) => {
-            newInputBottom = event.currentTarget.value;
+            setInputBottom(event.currentTarget.value);
           }}
         />
       </label>
@@ -146,7 +154,7 @@ export default function App() {
         <input
           placeholder="Template"
           onChange={(event) => {
-            newInputTemplate = event.currentTarget.value;
+            setInputTemplate(event.currentTarget.value);
           }}
         />
       </label>
@@ -155,9 +163,7 @@ export default function App() {
         <button
           data-test-id="generate-meme"
           onClick={() => {
-            setInputBottom(newInputBottom);
-            setInputTop(newInputTop);
-            setInputTemplate(newInputTemplate);
+            start();
           }}
         >
           Generate
@@ -171,7 +177,6 @@ export default function App() {
         value={newInputTemplate}
         onChange={(event) => {
           setInputTemplate(event.currentTarget.value);
-          newInputTemplate = event.currentTarget.value;
         }}
       >
         {templateData.map((event) => (
