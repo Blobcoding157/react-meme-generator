@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: 150vh;
   width: 100vw;
   background-color: azure;
 
@@ -10,6 +10,7 @@
 .header {
   color: blueviolet;
   margin: 50px;
+  font-size: xx-large;
   position: relative;
   animation: infinite;
   animation-name: titleAnimation;
@@ -38,7 +39,7 @@ button {
 button:hover {
   border-color: aquamarine;
   border-style: solid;
-  background-color: white;
+  background-color: azure;
 }
 
 input {
@@ -52,7 +53,7 @@ input {
   outline: none;
 }
 input:focus {
-  background-color: white;
+  background-color: azure;
   border: 2px solid aquamarine;
   text-align: center;
   border-radius: 10px;
@@ -78,7 +79,7 @@ select {
 }
 
 select:focus {
-  background-color: white;
+  background-color: azure;
   border: 2px solid aquamarine;
   border-radius: 10px;
   margin: 10px;

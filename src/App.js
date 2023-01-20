@@ -97,19 +97,21 @@ export default function App() {
     if (!newInputBottom) {
       newInputBottom = '';
     } else {
-      newInputBottom = newInputBottom
-        .replace(/[ ]/g, '_')
-        .replace(/[__]/g, '_')
-        .replace(/[--]/g, '-')
-        .replace(/[?]/g, '~q')
-        .replace(/[&]/g, '~a')
-        .replace(/[%]/g, '~p')
-        .replace(/[/]/g, '~s')
-        .replace(/[#]/g, '~h')
-        .replace(/[<]/g, '~l')
-        .replace(/[>]/g, '~g')
-        .replace(/["]/g, '')
-        .replace(/[\\]/g, '~b');
+      newInputBottom =
+        '/' +
+        newInputBottom
+          .replace(/[ ]/g, '_')
+          .replace(/[__]/g, '_')
+          .replace(/[--]/g, '-')
+          .replace(/[?]/g, '~q')
+          .replace(/[&]/g, '~a')
+          .replace(/[%]/g, '~p')
+          .replace(/[/]/g, '~s')
+          .replace(/[#]/g, '~h')
+          .replace(/[<]/g, '~l')
+          .replace(/[>]/g, '~g')
+          .replace(/["]/g, '')
+          .replace(/[\\]/g, '~b');
     }
 
     const url = `https://api.memegen.link/images/${newInputTemplate}/${newInputTop}${newInputBottom}.png`;
@@ -169,6 +171,7 @@ export default function App() {
         value={newInputTemplate}
         onChange={(event) => {
           setInputTemplate(event.currentTarget.value);
+          newInputTemplate = event.currentTarget.value;
         }}
       >
         {templateData.map((event) => (
@@ -187,3 +190,4 @@ export default function App() {
     </div>
   );
 }
+// event.currentTarget.value
