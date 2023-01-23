@@ -2,7 +2,6 @@ import './App.css';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 import { useState } from 'react';
-import bruh from './bruh.mp3';
 
 function NewGenerateImage({ templates, topTrue, bottomTrue }) {
   if (!templates) {
@@ -65,13 +64,6 @@ export default function App() {
   let newInputTemplate = inputTemplate;
   let newInputTop = inputTop;
   let newInputBottom = inputBottom;
-
-  function start() {
-    const omg = new Audio(bruh);
-    omg.play().catch((error) => {
-      console.error(error);
-    });
-  }
 
   axios
     .get('https://api.memegen.link/templates')
@@ -157,34 +149,33 @@ export default function App() {
             setInputTemplate(event.currentTarget.value);
           }}
         />
+        <select
+          value={newInputTemplate}
+          onChange={(event) => {
+            setInputTemplate(event.currentTarget.value);
+          }}
+        >
+          {templateData.map((event) => (
+            <option key={event.id} value={event.id}>
+              {event.id}
+            </option>
+          ))}
+        </select>
       </label>
       <br />
       <span>
-        <button
+        {/* <button
           data-test-id="generate-meme"
           onClick={() => {
-            start();
+
           }}
         >
           Generate
-        </button>
+        </button> */}
 
         <button onClick={handleClick}>Download</button>
       </span>
       <br />
-
-      <select
-        value={newInputTemplate}
-        onChange={(event) => {
-          setInputTemplate(event.currentTarget.value);
-        }}
-      >
-        {templateData.map((event) => (
-          <option key={event.id} value={event.id}>
-            {event.id}
-          </option>
-        ))}
-      </select>
 
       <br />
       <NewGenerateImage
